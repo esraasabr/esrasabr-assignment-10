@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f9fc; /* Light background color */
+            color: #333; /* Dark text color for contrast */
+            text-align: center; /* Center align all text */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, p {
+            margin-top: 20px; /* Add spacing at the top */
+            margin-bottom: 30px;
+        }
+
+        img {
+            border: 2px solid #ddd; /* Add a border around images */
+            border-radius: 8px;
+            padding: 5px;
+            margin: 10px;
+            max-width: 200px;
+        }
+
+        .container {
+            width: 100%; /* Full width */
+            max-width: 600px; /* Limit the maximum width */
+            margin: 0 auto; /* Center horizontally within the page */
+            padding-top: 50px; /* Space from the top */
+        }
+
+        ul {
+            list-style: none; /* Remove bullets from the list */
+            padding: 0;
+        }
+
+        li {
+            display: inline-block;
+            text-align: center;
+            margin: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        a:hover {
+            color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search Results</h1>
+        <a href="/">Go Back to Search</a>
+        {% if results %}
+            <p>Query Type: {{ query_type }}</p>
+            <h2>Top Matches:</h2>
+            <ul>
+                {% for result in results %}
+                    <li>
+                        <img src="{{ url_for('static', filename='coco_images_resized/' ~ result.file_name) }}" alt="Result Image" width="200">
+                        <p>Similarity Score: {{ result.score }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No results found. Please try again.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
